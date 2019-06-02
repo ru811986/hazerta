@@ -1,0 +1,29 @@
+package hazerta.ejercicio4;
+
+import java.util.List;
+
+public class ClasePrincipal {
+
+	public static void main(String[] args) {
+		int opcion = 0;
+		do {
+			opcion = EntradaSalida.pedirOpcion();
+			switch(opcion) {
+				case 1:
+					Alumno alumnoNuevo = EntradaSalida.pedirAlumno();
+					AccesoBD.insertAlumnoEnBD(alumnoNuevo);
+					break;
+				case 2:
+					List<Alumno> alumnos = AccesoBD.selectAlumnosDeBD();
+					EntradaSalida.mostrarAlumnos(alumnos);
+					break;
+				case 3:
+					String nombre = EntradaSalida.pedirNombre();
+					List<Alumno> alumnosBuscados = AccesoBD.selectAlumnosEnBD(nombre);
+					EntradaSalida.mostrarAlumnos(alumnosBuscados);
+					break;
+			}
+		} while(opcion != 4);
+	}
+
+}

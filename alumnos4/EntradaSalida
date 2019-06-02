@@ -1,0 +1,44 @@
+package hazerta.ejercicio4;
+
+import java.util.List;
+import java.util.Scanner;
+
+public class EntradaSalida {
+
+	public static int pedirOpcion() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Elija una opción\n"
+				+ "1 - Insertar alumno\n"
+				+ "2 - Mostrar alumnos\n"
+				+ "3 - Buscar alumnos por nombre\n"
+				+ "4 - Salir");
+		int opcion = Integer.parseInt(sc.nextLine());
+		return opcion;
+	}
+
+	public static Alumno pedirAlumno() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el nombre del alumno");
+		String nombre = sc.nextLine();
+		System.out.println("Introduzca el apellido del alumno");
+		String apellido = sc.nextLine();
+		System.out.println("Introduzca la edad del alumno");
+		int edad = Integer.parseInt(sc.nextLine());
+		Alumno alumno = new Alumno(nombre, apellido, edad);
+		return alumno;
+	}
+
+	public static void mostrarAlumnos(List<Alumno> alumnos) {
+		for(Alumno alumno : alumnos) {
+			System.out.println(alumno);
+		}
+	}
+
+	public static String pedirNombre() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca el nombre del alumno");
+		String nombre = sc.nextLine();
+		return nombre;
+	}
+
+}

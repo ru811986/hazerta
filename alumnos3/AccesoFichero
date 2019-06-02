@@ -1,0 +1,41 @@
+package hazerta.ejercicio3;
+
+import java.io.*;
+import java.util.ArrayList;
+
+public class AccesoFichero {
+
+	public static void grabarAlumnos(ArrayList<Alumno> alumnos) {
+		try {
+			FileWriter escritor = new FileWriter("C:\\Users\\USUARIO\\Desktop\\Ficheros\\CSV\\alumnos.csv");
+			String linea = "";
+			for(Alumno alumno : alumnos) {
+				linea += alumno.getNombre() + "," + alumno.getApellido() + "," + alumno.getEdad() + "\n";
+			}
+			escritor.write(linea);
+			escritor.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static ArrayList<Alumno> devolverAlumnos() {
+		ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+		try {
+			FileReader lector = new FileReader("C:\\Users\\USUARIO\\Desktop\\Ficheros\\CSV\\alumnos.csv");
+			BufferedReader buffer = new BufferedReader(lector);
+			String linea = "";
+			while((linea = buffer.readLine()) != null) {
+				String[] datos = linea.split(",");
+				Alumno alumno = new Alumno(datos[0], datos[1], Integer.parseInt(datos[2]));
+				alumnos.add(alumno);
+			}
+			buffer.close();
+			lector.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		return alumnos;
+	}
+
+}

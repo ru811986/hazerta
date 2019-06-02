@@ -1,0 +1,54 @@
+package hazerta.json;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+public class ClasePrincipal {
+	public static void main(String[] args) {
+		try {
+			FileReader fr = new FileReader("C:\\Users\\USUARIO\\Desktop\\Ficheros\\JSON\\datos.json");
+			JsonParser p = new JsonParser();
+			JsonElement e = p.parse(fr);
+			JsonObject objeto = e.getAsJsonObject();
+			JsonObject objetoResponsable = objeto.getAsJsonObject("responsable");
+			String nombreResponsable = objetoResponsable.get("Nombre").getAsString();
+			System.out.println("NOMBRE: " + nombreResponsable);
+			int edadResponsable = objetoResponsable.get("Edad").getAsInt();
+			System.out.println("EDAD: " + edadResponsable);
+			JsonArray aficionesResponsable = objetoResponsable.getAsJsonArray("Aficiones");
+			System.out.println("AFICIONES");
+			for(JsonElement aficionResponsable : aficionesResponsable) {
+				String aficion = aficionResponsable.getAsString();
+				System.out.println("- " + aficion);
+			}
+			String residenciaResponsable = objetoResponsable.get("Residencia").getAsString();
+			System.out.println("RESIDENCIA: " + residenciaResponsable);
+			JsonArray empleados = objeto.getAsJsonArray("empleados");
+			for(JsonElement empleado : empleados) {
+				JsonObject objetoEmpleado = empleado.getAsJsonObject();
+				String nombreEmpleado = objetoEmpleado.get("Nombre").getAsString();
+				System.out.println("NOMBRE EMPLEADO: " + nombreEmpleado);
+				int edadEmpleado = objetoEmpleado.get("Edad").getAsInt();
+				System.out.println("EDAD EMPLEADO: " + edadEmpleado);
+				//
+				JsonArray aficionesEmpleado = objetoEmpleado.getAsJsonArray("Aficiones");
+				System.out.println("AFICIONES EMPLEADO");
+				for(JsonElement aficionEmpleado : aficionesEmpleado) {
+					String aficion = aficionEmpleado.getAsString();
+					System.out.println("- " + aficion);
+				}
+				//
+				String residenciaEmpleado = objetoEmpleado.get("Residencia").getAsString();
+				System.out.println("RESIDENCIA EMPLEADO: " + residenciaEmpleado);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

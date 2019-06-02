@@ -1,0 +1,81 @@
+package hazerta.ejercicio4;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AccesoBD {
+	
+	public static Connection conectar() {
+        Connection c = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/basedatos_hazerta?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            String user = "root";
+            String pass = "";
+            c = DriverManager.getConnection(url, user, pass);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return c;
+    }
+	
+	public static void insertAlumnoEnBD(Alumno alumnoNuevo) {
+		try {
+            Connection c = conectar();
+            Statement stmt = c.createStatement();
+            String nombre = alumnoNuevo.getNombre();
+            String apellido = alumnoNuevo.getApellido();
+            int edad = alumnoNuevo.getEdad();
+            String insert = "INSERT INTO t_alumnos VALUES ('" + nombre + "', '" + apellido + "' ," + edad + ")";
+            stmt.executeUpdate(insert);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+	}
+
+	public static List<Alumno> selectAlumnosDeBD() {
+		ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+        try {
+            Connection c = conectar();
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM t_alumnos");
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                int edad = rs.getInt("edad");
+                Alumno alumno = new Alumno(nombre, apellido, edad);
+                alumnos.add(alumno);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return alumnos;
+	}
+
+	public static List<Alumno> selectAlumnosEnBD(String nombreBuscado) {
+		ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+        try {
+            Connection c = conectar();
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM t_alumnos WHERE nombre LIKE '%" + nombreBuscado + "%'");
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                int edad = rs.getInt("edad");
+                Alumno alumno = new Alumno(nombre, apellido, edad);
+                alumnos.add(alumno);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return alumnos;
+	}
+
+}

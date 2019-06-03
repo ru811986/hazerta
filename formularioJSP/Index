@@ -19,7 +19,7 @@
             <label>APELLIDO:</label>
             <input type="text" name="apellido">
             <label>EDAD:</label>
-            <input type="text" name="edad">
+            <input type="number" min="0" name="edad">
             <input type="submit" value="Enviar">
         </form>
     </body>

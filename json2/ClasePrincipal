@@ -1,0 +1,43 @@
+package hazerta.json2;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+public class ClasePrincipal {
+	public static void main(String[] args) {
+		try {
+			FileReader fr = new FileReader("C:/Users/USUARIO/Desktop/Ficheros/JSON/barrios_municipio_madrid.json");
+			JsonParser p = new JsonParser();
+			JsonElement e = p.parse(fr);
+			JsonObject objeto = e.getAsJsonObject();
+			JsonArray arrayData = objeto.getAsJsonArray("data");
+			for(JsonElement elemento: arrayData) {
+				JsonObject objetoBarrio = elemento.getAsJsonObject();
+				String barrioCodigo = objetoBarrio.get("barrio_codigo").getAsString();
+				System.out.println("barrio_codigo: " + barrioCodigo);
+				String municipioCodigo = objetoBarrio.get("municipio_codigo").getAsString();
+				System.out.println("municipio_codigo: " + municipioCodigo);
+				double densidadPorKm2 = Double.parseDouble(objetoBarrio.get("densidad_por_km2").getAsString());
+				System.out.println("densidad_por_km2: " + densidadPorKm2);
+				String distritoNombre = objetoBarrio.get("distrito_nombre").getAsString().trim();
+				System.out.println("distrito_nombre: " + distritoNombre);
+				String municipioNombre = objetoBarrio.get("municipio_nombre").getAsString();
+				System.out.println("municipio_nombre: " + municipioNombre);
+				String distritoCodigo = objetoBarrio.get("distrito_codigo").getAsString();
+				System.out.println("distrito_codigo: " + distritoCodigo);
+				double superficieKm2 = Double.parseDouble(objetoBarrio.get("superficie_km2").getAsString());
+				System.out.println("superficie_km2: " + superficieKm2);
+				String barrioNombre = objetoBarrio.get("barrio_nombre").getAsString().trim();
+				System.out.println("barrio_nombre: " + barrioNombre);
+				System.out.println("---");
+			}
+		} catch(FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+}

@@ -1,0 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.examen;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Mañana
+ */
+public class FicheroCSV {
+
+    public static void exportarACSV(ArrayList<Producto> productos) {
+        try {
+            FileWriter fw = new FileWriter("C:/Users/Mañana/Desktop/productosCSV.csv");
+            String linea = "";
+            for(Producto producto : productos) {
+                linea += producto.getNombre() + "," + producto.getPrecio() + "," + producto.getStock() + "\n";
+            }
+            fw.write(linea);
+            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FicheroCSV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+}

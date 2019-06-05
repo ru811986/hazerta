@@ -1,0 +1,17 @@
+Crea una aplicación para registrar los productos de una tienda (nombre, precio y stock) en una base de datos de MySQL
+Habrá una opción para insertar productos, otra para listarlos y otra para exportar de la BD a xml.
+
+1-Insertar producto
+2-Listar productos
+3-Exportar a xml.
+4-Exportar a csv
+5-Salir.
+
+Rúbrica:
+
+Muestra el menú con las opciones indicadas	2 puntos
+Crea la clase Producto con las opciones nombre, precio y stock	1 punto
+Inserta objetos producto en la tabla	2 puntos
+Lista los productos de la tienda	2 puntos
+Exporta la tabla a un xml	1.5 puntos
+Exporta la tabla a un csv	1.5 puntos

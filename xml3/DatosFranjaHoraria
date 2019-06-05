@@ -1,0 +1,52 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.xml3;
+
+/**
+ *
+ * @author Mañana
+ */
+class DatosFranjaHoraria {
+    private String franja;
+    private String cantidad;
+    private String verificado;
+
+    public DatosFranjaHoraria(String franja, String cantidad, String verificado) {
+        this.franja = franja;
+        this.cantidad = cantidad;
+        this.verificado = verificado;
+    }
+
+    public void setFranja(String franja) {
+        this.franja = franja;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public void setVerificado(String verificado) {
+        this.verificado = verificado;
+    }
+
+    public String getFranja() {
+        return franja;
+    }
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public String getVerificado() {
+        return verificado;
+    }
+
+    @Override
+    public String toString() {
+        String datos = "\nFranja horaria: " + franja + " Cantidad: " + cantidad + " Verificado: " + verificado;
+        return datos; //To change body of generated methods, choose Tools | Templates.
+    }
+}

@@ -1,0 +1,67 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.xml3;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Mañana
+ */
+public class DatosCalidadAire {
+    private String estacion;
+    private String magnitud;
+    private String fecha;
+    private ArrayList<DatosFranjaHoraria> datos;
+
+    public DatosCalidadAire(String estacion, String magnitud, String fecha, ArrayList<DatosFranjaHoraria> datos) {
+        this.estacion = estacion;
+        this.magnitud = magnitud;
+        this.fecha = fecha;
+        this.datos = datos;
+    }
+
+    public void setEstacion(String estacion) {
+        this.estacion = estacion;
+    }
+
+    public void setMagnitud(String magnitud) {
+        this.magnitud = magnitud;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setDatos(ArrayList<DatosFranjaHoraria> datos) {
+        this.datos = datos;
+    }
+
+    public String getEstacion() {
+        return estacion;
+    }
+
+    public String getMagnitud() {
+        return magnitud;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public ArrayList<DatosFranjaHoraria> getDatos() {
+        return datos;
+    }
+
+    @Override
+    public String toString() {
+        String datos = "Estación: " + estacion + " Magnitud: " + magnitud + " Fecha: " + fecha;
+        for(DatosFranjaHoraria datosFH : this.datos) {
+            datos += datosFH.toString();
+        }
+        return datos;
+    }
+}

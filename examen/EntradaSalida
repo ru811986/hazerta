@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.examen;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mañana
+ */
+public class EntradaSalida {
+
+    public static int pedirOpcion() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Elija una opción\n"
+                + "1 - Insertar producto\n"
+                + "2 - Listar productos\n"
+                + "3 - Exportar a XML\n"
+                + "4 - Exportar a CSV\n"
+                + "5 - Salir");
+        int opcion = Integer.parseInt(sc.nextLine());
+        return opcion;
+    }
+
+    public static Producto pedirProducto() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Introduzca el nombre del producto: ");
+        String nombre = sc.nextLine();
+        System.out.print("Introduzca el precio del producto: ");
+        double precio = Double.parseDouble(sc.nextLine());
+        System.out.print("Introduzca el stock del producto: ");
+        int stock = Integer.parseInt(sc.nextLine());
+        Producto nuevoProducto = new Producto(nombre, precio, stock);
+        return nuevoProducto;
+    }
+
+    public static void mostrarProductos(ArrayList<Producto> productos) {
+        for(Producto producto: productos) {
+            System.out.println(producto);
+        }
+    }
+    
+}

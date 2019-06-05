@@ -1,0 +1,32 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.xml3;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mañana
+ */
+class EntradaSalida {
+
+    static int pedirOpcion() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Elija una opción\n"
+                + "1 - Buscar una estación\n"
+                + "2 - Salir");
+        int opcion = Integer.parseInt(sc.nextLine());
+        return opcion;
+    }
+
+    static String pedirEstacion() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca una estación");
+        String estacion = sc.nextLine();
+        return estacion;
+    }
+    
+}

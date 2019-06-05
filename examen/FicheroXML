@@ -1,0 +1,46 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.examen;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Mañana
+ */
+public class FicheroXML {
+
+    public static void exportarAXML(ArrayList<Producto> productos) {
+            FileWriter fw = null;
+        try {
+            fw = new FileWriter("C:/Users/Mañana/Desktop/productosXML.xml");
+            String linea = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<productos>\n";
+            for(Producto producto : productos) {
+                linea += "<producto>\n";
+                linea += "<nombre>" + producto.getNombre() + "</nombre>\n";
+                linea += "<precio>" + producto.getPrecio() + "</precio>\n";
+                linea += "<stock>" + producto.getStock() + "</stock>\n";
+                linea += "</producto>\n";
+            }
+            linea += "</productos>\n";
+            fw.write(linea);
+            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FicheroXML.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FicheroXML.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,67 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.examen;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Mañana
+ */
+public class AccesoBD {
+
+    public static Connection conectar() {
+        Connection c = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/basedatos_hazerta";
+            String user = "root";
+            String pass = "";
+            c = DriverManager.getConnection(url, user, pass);
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return c;
+    }
+
+    public static void insertProducto(Producto producto) {
+        try {
+            Connection c = conectar();
+            Statement stmt = c.createStatement();
+            String nombre = producto.getNombre();
+            double precio = producto.getPrecio();
+            int stock = producto.getStock();
+            String sql = "INSERT INTO t_productos VALUES ('" + nombre + "', " + precio + " ," + stock + ")";
+            stmt.executeUpdate(sql);
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static ArrayList<Producto> selectProductos() {
+        ArrayList<Producto> productos = new ArrayList<Producto>();
+        try {
+            Connection c = conectar();
+            Statement stmt = c.createStatement();
+            String sql = "SELECT * FROM t_productos";
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+                String nombre = rs.getString("nombre");
+                double precio = rs.getDouble("precio");
+                int stock = rs.getInt("stock");
+                Producto producto = new Producto(nombre, precio, stock);
+                productos.add(producto);
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return productos;
+    }
+
+}

@@ -1,0 +1,75 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.xml1;
+
+import java.io.*;
+import java.util.List;
+import java.util.logging.*;
+import org.jdom2.*;
+import org.jdom2.input.SAXBuilder;
+
+/**
+ *
+ * @author Mañana
+ */
+public class ClasePrincipal {
+    public static void main(String[] args) {
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            Document documento = builder.build(new File("C:\\xml\\localidad_28079.xml"));
+            Element elementoRaiz = documento.getRootElement();
+            Element elementoOrigen = elementoRaiz.getChild("origen");
+            System.out.println("Origen");
+            Element elementoProductor = elementoOrigen.getChild("productor");
+            String productor = elementoProductor.getValue();
+            System.out.println("- Productor: " + productor);
+            Element elementoWeb = elementoOrigen.getChild("web");
+            String web = elementoWeb.getValue();
+            System.out.println("- Web: " + web);
+            Element elementoEnlace = elementoOrigen.getChild("enlace");
+            String enlace = elementoEnlace.getValue();
+            System.out.println("- Enlace: " + enlace);
+            Element elementoLanguage = elementoOrigen.getChild("language");
+            String language = elementoLanguage.getValue();
+            System.out.println("- Lenguaje: " + language);
+            Element elementoCopyright = elementoOrigen.getChild("copyright");
+            String copyright = elementoCopyright.getValue();
+            System.out.println("- Copyright: " + copyright);
+            Element elementoNotaLegal = elementoOrigen.getChild("nota_legal");
+            String notaLegal = elementoNotaLegal.getValue();
+            System.out.println("- Nota legal: " + notaLegal);
+            Element elementoNombre = elementoRaiz.getChild("nombre");
+            String nombre = elementoNombre.getValue();
+            System.out.println("Nombre: " + nombre);
+            Element elementoProvincia = elementoRaiz.getChild("provincia");
+            String provincia = elementoProvincia.getValue();
+            System.out.println("Provincia: " + provincia);
+            Element elementoPrediccion = elementoRaiz.getChild("prediccion");
+            System.out.println("Predicción");
+            List<Element> elementosDia = elementoPrediccion.getChildren("dia");
+            for(int i = 0; i < elementosDia.size(); i++) {
+                Element elementoDia = elementosDia.get(i);
+                String fecha = elementoDia.getAttributeValue("fecha");
+                String[] datosFecha = fecha.split("-");
+                String dia = datosFecha[2];
+                String mes = datosFecha[1];
+                String año = datosFecha[0];
+                String fechaFormato = dia + "-" + mes + "-" + año;
+                Element elementoTemperatura = elementoDia.getChild("temperatura");
+                Element elementoTempMaxima = elementoTemperatura.getChild("maxima");
+                String tempMaxima = elementoTempMaxima.getValue();
+                Element elementoTempMinima = elementoTemperatura.getChild("minima");
+                String tempMinima = elementoTempMinima.getValue();
+                System.out.println("- Fecha: " + fechaFormato + " Temp. mínima: " + tempMinima + "º C Temp. Máxima: " + tempMaxima + "º C");
+            }
+        } catch (JDOMException ex) {
+            Logger.getLogger(ClasePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ClasePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+}

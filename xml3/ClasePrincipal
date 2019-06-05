@@ -1,0 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package hazerta.xml3;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Mañana
+ */
+public class ClasePrincipal {
+    public static void main(String[] args) {
+        int opcion = EntradaSalida.pedirOpcion();
+        while(opcion != 2) {
+            switch(opcion) {
+                case 1:
+                    String estacion = EntradaSalida.pedirEstacion();
+                    ArrayList<DatosCalidadAire> datosCAE = ParseoXML.parsearXML("C:/xml/datos.xml");
+                    boolean hayDatos = false;
+                    for(DatosCalidadAire datosCA : datosCAE) {
+                        if(datosCA.getEstacion().equals(estacion)) {
+                            hayDatos = true;
+                            System.out.println(datosCA);
+                        }
+                    }
+                    if(!hayDatos) {
+                        System.out.println("No hay datos de la estación " + estacion);
+                    }
+                    break;
+                default:
+                    System.out.println("Introduzca una opción correcta");
+            }
+            opcion = EntradaSalida.pedirOpcion();
+        }
+    }
+}
